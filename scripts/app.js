@@ -3,10 +3,7 @@ const locationForm = document.querySelector('form');
 const updateLocation = async locationSearch => {
     const locationDets = await getLocation(locationSearch);
     const weather = await getWeather(locationDets.Key);
-    return {
-        locationDets: locationDets,
-        weather: weather
-    };
+    return { locationDets, weather };
 };
 
 locationForm.addEventListener('submit', e => {
