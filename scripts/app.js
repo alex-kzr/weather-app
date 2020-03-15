@@ -1,6 +1,8 @@
 const locationForm = document.querySelector('form');
 const card = document.querySelector('.card');
 const details = document.querySelector('.details');
+const time = document.querySelector('.time');
+const icon = document.querySelector('.icon img');
 
 const updateUI = data => {
     const { locationDets, weather } = data;
@@ -19,6 +21,23 @@ const updateUI = data => {
     if(card.classList.contains('d-none')){
         card.classList.remove('d-none');
     }
+
+    // update the night/day & icon images
+    const iconSrc = `img/icons/${weather.WeatherIcon}.svg`;
+    icon.setAttribute('src', iconSrc);
+
+    let timeSrc = null;
+    if(weather.IsDayTime){
+        timeSrc = 'img/day.svg';
+    }else{
+        timeSrc = 'img/night.svg';
+    }
+    time.setAttribute('src', timeSrc);
+
+
+
+
+    console.log(data);
 };
 
 const updateLocation = async locationSearch => {
