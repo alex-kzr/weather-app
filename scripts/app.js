@@ -3,8 +3,7 @@ const card = document.querySelector('.card');
 const details = document.querySelector('.details');
 
 const updateUI = data => {
-    const locationDets = data.locationDets;
-    const weather = data.weather;
+    const { locationDets, weather } = data;
 
     //update details template
     details.innerHTML = `
