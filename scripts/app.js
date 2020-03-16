@@ -44,5 +44,14 @@ locationForm.addEventListener('submit', e => {
     
     updateLocation(locationSearch)
         .then(data => updateUI(data))
-        .catch(err => console.log(err));        
+        .catch(err => console.log(err));
+    
+    // set lacal storage
+    localStorage.setItem('location', locationSearch);
 });
+
+if(localStorage.getItem('location')){
+    updateLocation(localStorage.getItem('location'))
+        .then(data => updateUI(data))
+        .catch(err => console.log(err));
+}
