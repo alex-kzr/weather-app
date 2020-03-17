@@ -3,6 +3,7 @@ const card = document.querySelector('.card');
 const details = document.querySelector('.details');
 const time = document.querySelector('.time');
 const icon = document.querySelector('.icon img');
+const forecast = new Forecast();
 
 const updateUI = data => {
     const { locationDets, weather } = data;
@@ -30,19 +31,13 @@ const updateUI = data => {
     time.setAttribute('src', timeSrc);
 };
 
-const updateLocation = async locationSearch => {
-    const locationDets = await getLocation(locationSearch);
-    const weather = await getWeather(locationDets.Key);
-    return { locationDets, weather };
-};
-
 locationForm.addEventListener('submit', e => {
     e.preventDefault();
     
     const locationSearch = locationForm.location.value.trim();
     locationForm.reset();
     
-    updateLocation(locationSearch)
+    forecast.updateLocation(locationSearch)
         .then(data => updateUI(data))
         .catch(err => console.log(err));
     
@@ -51,7 +46,7 @@ locationForm.addEventListener('submit', e => {
 });
 
 if(localStorage.getItem('location')){
-    updateLocation(localStorage.getItem('location'))
+    forecast.updateLocation(localStorage.getItem('location'))
         .then(data => updateUI(data))
         .catch(err => console.log(err));
 }
